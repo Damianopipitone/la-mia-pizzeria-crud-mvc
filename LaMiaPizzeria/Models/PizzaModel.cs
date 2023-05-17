@@ -15,9 +15,15 @@ namespace LaMiaPizzeria.Models
         public string Description { get; set; }
         
         [MaxLength(300)]
-        public string imgSource { get; set; }
+        public string ImgSource { get; set; }
         public float Price { get; set; }
 
-
+        public PizzaModel(string name, string description, string imgSource, float price)
+        {
+            Name = name;
+            Description = description;
+            ImgSource = imgSource;
+            Price = price;
+        }
     }
 }
