@@ -4,15 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LaMiaPizzeria.Controllers
 {
-    public class PizzaController1 : Controller
+    public class PizzaController : Controller
     {
-        public IActionResult NewIndex()
+        public IActionResult Index()
         {   
             using (PizzaContext db = new PizzaContext())
             {
                 List<PizzaModel> pizze = db.Pizze.ToList();
+                
+                return View(pizze);
             }
-            return View(pizze);
+            
         }
     }
 }
