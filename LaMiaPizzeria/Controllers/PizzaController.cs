@@ -16,13 +16,9 @@ namespace LaMiaPizzeria.Controllers
             }
             
         }
-    }
 
-    public class FormController : Controller
-    {
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public IActionResult Create(PizzaModel data)
         {
             if (!ModelState.IsValid)
@@ -32,13 +28,9 @@ namespace LaMiaPizzeria.Controllers
 
             using (PizzaContext context = new PizzaContext())
             {
-                PizzaModel newPizza = new PizzaModel();
-                newPizza.Name = data.Name;
-                newPizza.id = data.id;
-                newPizza.ImgSource = data.ImgSource;
-                newPizza.Description = data.Description;
+                
 
-                context.Pizze.Add(newPizza);
+                context.Pizze.Add(data);
 
                 context.SaveChanges();
 
@@ -47,11 +39,10 @@ namespace LaMiaPizzeria.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Create()
         {
             return View();
         }
-
-
     }
+
 }
