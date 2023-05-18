@@ -8,14 +8,21 @@ namespace LaMiaPizzeria.Models
         public int id { get; set; }
         
         [MaxLength(40)]
+        [Required(ErrorMessage = "Il campo è obbligatorio")]
         public string Name { get; set; }
         
         [MaxLength(100)]
         [Column(TypeName = "text")]
+        [Required(ErrorMessage = "Il campo è obbligatorio")]
         public string Description { get; set; }
         
         [MaxLength(300)]
+        [Required(ErrorMessage = "Il campo è obbligatorio")]
+        [Url]
         public string ImgSource { get; set; }
+
+        [Required(ErrorMessage = "Il campo è obbligatorio")]
+        [Range(10, 20)]
         public float Price { get; set; }
 
         public PizzaModel()

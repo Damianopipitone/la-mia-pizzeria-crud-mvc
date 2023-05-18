@@ -1,23 +1,29 @@
-﻿<div class="container">
+﻿@model PizzaModel
+<div class="container">
 
     <form asp-controller="Pizza" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nome Pizza</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label class="form-label">Nome Pizza</label>
+            <input asp-for="Name" class="form-control" required>
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Descrizione</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label class="form-label">Descrizione</label>
+            <input asp-for="Description" class="form-control" required>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Url Immagine</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label class="form-label">Url Immagine</label>
+            <input asp-for="ImgSource" class="form-control" required>
+            <span asp-validation-for="ImgSource" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Prezzo</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label class="form-label">Prezzo</label>
+            <input asp-for="Price" class="form-control" required>
+            <span asp-validation-for="Price" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary btn-info" value="Salva">Invia</button>
     </form>
 
 </div>
