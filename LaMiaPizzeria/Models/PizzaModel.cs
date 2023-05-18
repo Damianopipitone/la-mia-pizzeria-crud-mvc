@@ -18,6 +18,11 @@ namespace LaMiaPizzeria.Models
         public string ImgSource { get; set; }
         public float Price { get; set; }
 
+        public PizzaModel()
+        {
+
+        }
+
         public PizzaModel(string name, string description, string imgSource, float price)
         {
             Name = name;
