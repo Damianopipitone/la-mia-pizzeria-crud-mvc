@@ -1,16 +1,19 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using LaMiaPizzeria.Areas.Identity.Data;
 using Microsoft.AspNetCore.Builder;
+using LaMiaPizzeria.DataBase;
+
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("ProfileContextConnection") ?? throw new InvalidOperationException("Connection string 'ProfileContextConnection' not found.");
 
-builder.Services.AddDbContext<ProfileContext>(options =>
-    options.UseSqlServer(connectionString));
+
+
+builder.Services.AddDbContext<PizzaContext>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ProfileContext>();
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<PizzaContext>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
