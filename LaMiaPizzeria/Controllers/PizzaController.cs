@@ -1,5 +1,6 @@
 ﻿using LaMiaPizzeria.DataBase;
 using LaMiaPizzeria.Models;
+using LaMiaPizzeria.Models.ModelForView;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
@@ -51,7 +52,10 @@ namespace LaMiaPizzeria.Controllers
 
             using (PizzaContext context = new PizzaContext())
             {
-                
+                List<PizzaCategory> pizzaCategories = context.pizzaCategories.ToList();
+                PizzaListCategory modelForView = new PizzaListCategory();
+                modelForView.Pizzas = new PizzaModel();
+                modelForView.PizzasCategories = pizzaCategories;
 
                 context.Pizze.Add(data);
 

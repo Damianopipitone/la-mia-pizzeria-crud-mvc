@@ -1,4 +1,5 @@
-﻿@model PizzaModel
+﻿@using LaMiaPizzeria.Models.ModelForView
+@model PizzaListCategory 
 <div class="container">
 
     <form asp-controller="Pizza" asp-action="Create" method="post">
@@ -22,6 +23,16 @@
             <label class="form-label">Prezzo</label>
             <input asp-for="Price" class="form-control" required>
             <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Categoria:</strong>
+            <select asp-for="PizzaModel.PizzaCategoryId" title="PizzaCategory" rows="10" class="d-block w-100">
+                <option value=""></option>
+                @foreach (PizzaCategory category in Model.PizzaCategories ?? new List<PizzaCategory>())
+                {
+                    <option value="@category.Id" selected="@(Model.PizzaModel.PizzaCategoryId == category.Id ? "selected" : null)">@category.Name</option>
+                }
+            </select>
         </div>
         <button type="submit" class="btn btn-primary btn-info" value="Salva">Invia</button>
     </form>
