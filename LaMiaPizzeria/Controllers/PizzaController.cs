@@ -40,9 +40,30 @@ namespace LaMiaPizzeria.Controllers
 
         }
 
+        
+
+        [HttpGet]
+        public IActionResult Create()
+        {   
+
+            using (PizzaContext context = new PizzaContext())
+            {
+                List<PizzaCategory> pizzaCategories = context.pizzaCategories.ToList();
+
+                PizzaListCategory modelForView = new PizzaListCategory();
+                modelForView.Pizzas = new PizzaModel();
+                modelForView.PizzasCategories = pizzaCategories; 
+                
+                return View("Create", modelForView);
+            }
+
+            
+           
+        }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "ADMIN,USER")]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Create(PizzaModel data)
         {
             if (!ModelState.IsValid)
@@ -53,9 +74,6 @@ namespace LaMiaPizzeria.Controllers
             using (PizzaContext context = new PizzaContext())
             {
                 List<PizzaCategory> pizzaCategories = context.pizzaCategories.ToList();
-                PizzaListCategory modelForView = new PizzaListCategory();
-                modelForView.Pizzas = new PizzaModel();
-                modelForView.PizzasCategories = pizzaCategories;
 
                 context.Pizze.Add(data);
 
@@ -66,13 +84,7 @@ namespace LaMiaPizzeria.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "ADMIN,USER")]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Update(int id)
         {
             using (PizzaContext context = new PizzaContext())
@@ -81,18 +93,13 @@ namespace LaMiaPizzeria.Controllers
 
                 if (pizzeToEdit == null)
                 {
-                    return NotFound();
+                    return NotFound("La pizza che stai cercando non esiste");
                 } else
                 {
-                    return View(pizzeToEdit);
+                    return View("Update", pizzeToEdit);
                 }
             }
 
-        }
-
-        public IActionResult Update() 
-        {
-            return View();
         }
 
         [HttpPost]
@@ -101,7 +108,7 @@ namespace LaMiaPizzeria.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Create", updatedPizza);
+                return View("Update", updatedPizza);
             } else
             {   
 

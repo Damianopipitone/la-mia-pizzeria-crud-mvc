@@ -25,6 +25,9 @@ namespace LaMiaPizzeria.Models
         [Range(10, 20)]
         public float Price { get; set; }
 
+        public int? PizzaCategoryId { get; set; }
+        public PizzaCategory? Category { get; set; }
+
         public PizzaModel()
         {
 
